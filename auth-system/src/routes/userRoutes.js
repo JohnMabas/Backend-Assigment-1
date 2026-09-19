@@ -7,10 +7,8 @@ const usersStore = require('../data/users');
 
 const router = express.Router();
 
-// GET /api/profile - any logged-in user can see their own profile
 router.get('/profile', authenticate, userController.getProfile);
 
-// GET /api/admin/dashboard - admins only (authenticate first, then authorize)
 router.get('/admin/dashboard', authenticate, authorize('admin'), (req, res) => {
   const totalUsers = usersStore.getAllUsers().length;
 
